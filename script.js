@@ -1,39 +1,39 @@
-const url = "https://api.edamam.com/api/recipes/v2?type=public&app_id=8f015481&app_key=04f42a1106f1c5216b12df8b78208f16&diet=balanced"
-const veganData = []
+const url = "https://api.api-ninjas.com/v1/exchangerate?pair=USD_EUR";
+const key = "CXHCZ7YbLDKIhSqZ4J6HYQ==GIiWCmCVRbX5Hmm5";
 
+function ajaxApiData() {
+  $.ajax({
+    url: url,
+    method: "GET",
+    headers: { "X-Api-Key": key },
+    contentType: "application/json",
+  }).then(function (response) {
+    console.log(response);
+  });
+}
 
-function getVeganData() {
-    $.ajax( {
-        url: url,
-        method: 'GET',
-    })
+function fetchApi() {
+  const requestUrl = "https://api.api-ninjas.com/v1/exchangerate?pair=USD_EUR";
+
+  fetch(requestUrl, {
+    headers: {
+      "X-API-KEY": "CXHCZ7YbLDKIhSqZ4J6HYQ==GIiWCmCVRbX5Hmm5",
+    },
+  })
     .then(function (response) {
-        for(let i = 0; i < 5; i++){
-            veganData.push(response.hits[i])
-            //(AFTER MVP) IF LINKS TO RECPIE ARE BROKEN DO NOT ADD TO LIST.
-        }
-        processVeganData()
+      console.log("fetch, line24", response);
+      return response.json();
     })
+    .then(function (data) {
+      console.log("fetch line 28", data);
+    });
 }
 
-function processVeganData(){
-    veganData
-    //NAME
-    //ADD FOR-LOOP TO RUN THROUGH veganData[] (Do later.)
-    console.log(veganData[0].recipe.label)
+const buttonEL = document
+  .getElementById("btn")
+  .addEventListener("click", ajaxApiData);
 
-    // INGREDIENTS 
-    console.log(veganData[0].recipe.ingredients)
-    // todo add for loop TO RUN THROUGH veganData[0].recipe.[i]ingredients[i]
+const fetchApiEl = document
+  .getElementById("fetch-btn")
+  .addEventListener("click", fetchApi);
 
-    // ADD LINK
-    // ADDPICTURE
-
-    // PUT ON PAGE BY MODIFYING AN EXISTINGS ELEMENT, OR BY APPENDING NEW ELEMENTS AND MODIFYING THE TEXT OF THOSE ELEMENTS (HINT:TEXT CONTENT)
-
-    // HINT SETUP FOR-LOOP TO PUT ALL OF THEM ON THE PAGE (REMEMBER, TRY AND JUST DO IT ONCE, AND THEN ADD THE FOR-LOOP TO DO EVERYTHING)
-}
-
-
-
-const buttonEL = document.getElementById("btn").addEventListener("click", getVeganData)
